@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 import './App.css';
+import Header from './components/Header/Header';
+import Home from './components/Layout/Home/Home';
+import Error404 from './components/Layout/Error404';
+import { Container } from '@material-ui/core';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Container>
+        <Route render={({ location }) => (
+          <Switch location={location}>
+            <Route exact path="/" component={Home} />
+            <Route path="/404" component={Error404} />
+            <Redirect to='/404' />
+          </Switch>
+        )} />
+      </Container>
+    </BrowserRouter>
   );
 }
 
