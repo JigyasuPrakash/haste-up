@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import { makeStyles, fade } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
+// import SearchIcon from '@material-ui/icons/Search';
+// import InputBase from '@material-ui/core/InputBase';
 import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -99,7 +99,7 @@ function Header(props) {
                                     Haste Up
                                 </NavLink>
                             </Typography>
-                            <div className={classes.search}>
+                            {/* <div className={classes.search}>
                                 <div className={classes.searchIcon}>
                                     <SearchIcon />
                                 </div>
@@ -110,8 +110,9 @@ function Header(props) {
                                         input: classes.inputInput,
                                     }}
                                     inputProps={{ 'aria-label': 'search' }}
+                                    
                                 />
-                            </div>
+                            </div> */}
                         </Toolbar>
                     </AppBar>
                 </div>

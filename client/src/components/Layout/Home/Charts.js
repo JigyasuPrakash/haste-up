@@ -1,42 +1,84 @@
 import React, { Component } from 'react'
-import { Grid, Paper } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import { Bar, Doughnut } from 'react-chartjs-2';
+import axios from 'axios';
 
 class Charts extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
-            chartData: {
-                labels: ['Boston', 'Worcester', 'SpringField', 'Lowell', 'Cambridge', 'New Bedford'],
-                datasets: [{
-                    label: 'Population',
-                    data: [617594, 181045, 153060, 106519, 105162, 95072],
-                    backgroundColor: [
-                        'rgba(255,99,132,0.6)',
-                        'rgba(54,162,235,0.6)',
-                        'rgba(75,192,192,0.6)',
-                        'rgba(153,102,255,0.6)',
-                        'rgba(255,159,64,0.6)',
-                        'rgba(255,99,132,0.6)'
-                    ],
-                    borderWidth: 1,
-                    borderColor: '#777',
-                    hoverBorderWidth: 3,
-                    hoverBorderColor: '#fff'
-                }]
-            },
-            options: {
+            pieChartData: {},
+            barData: {},
+            optionsPie: {
                 title: {
                     display: true,
-                    text: 'Largest Cities In Massachusetts',
-                    fontSize: 25
+                    text: "Statewise Data"
                 },
-                legend: {
+                legends: {
+                    display: true
+                },
+                maintainAspectRatio: true
+            },
+            optionsBar: {
+                title: {
                     display: true,
-                }
+                    text: "Coursewise Data"
+                },
+                legends: {
+                    display: true
+                },
+                maintainAspectRatio: true
             }
         }
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8080/getchartdata')
+            .then((response) => {
+                this.setState({
+                    pieChartData: {
+                        labels: response.data.labels1,
+                        datasets: [{
+                            data: response.data.percentage1,
+                            backgroundColor: [
+                                'rgba(255,99,132,0.6)',
+                                'rgba(54,162,235,0.6)',
+                                'rgba(75,192,192,0.6)'
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#777',
+                            hoverBorderWidth: 3,
+                            hoverBorderColor: '#fff'
+                        }]
+                    },
+                    barData: {
+                        labels: response.data.labels2,
+                        datasets: [{
+                            label: '',
+                            data: response.data.percentage2,
+                            backgroundColor: [
+                                'rgba(152,99,210,0.6)',
+                                'rgba(152,99,210,0.6)',
+                                'rgba(152,99,210,0.6)',
+                                'rgba(152,99,210,0.6)',
+                                'rgba(152,99,210,0.6)',
+                                'rgba(152,99,210,0.6)',
+                                'rgba(152,99,210,0.6)',
+                                'rgba(152,99,210,0.6)',
+
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#777',
+                            hoverBorderWidth: 3,
+                            hoverBorderColor: '#fff'
+                        }]
+                    }
+                })
+            })
+            .catch((error) => {
+                console.error('Somthing went wrong', error)
+            })
     }
 
     render() {
@@ -49,7 +91,7 @@ class Charts extends Component {
                 padding: '10px'
             },
             paper: {
-                padding: '5px'
+                padding: '10px'
             }
         };
 
@@ -58,27 +100,19 @@ class Charts extends Component {
                 <Grid container justify="space-evenly" direction="row" alignItems="center">
                     <Grid item xs={6} style={styles.box}>
                         <Paper style={styles.paper}>
-                            <Doughnut data={this.state.chartData} options={{ maintainAspectRatio: true }} />
+                            <Doughnut data={this.state.pieChartData} options={this.state.optionsPie} onElementsClick={ele => {
+                                window.localStorage.setItem('StateName', this.state.barData.labels[ele[0]._index]);
+                                window.location.href = "/collegelist"
+                            }} />
                         </Paper>
                     </Grid>
 
                     <Grid item xs={6} style={styles.box}>
                         <Paper style={styles.paper}>
-                            <Bar data={this.state.chartData} options={{ maintainAspectRatio: true }} />
-                        </Paper>
-                    </Grid>
-                </Grid>
-
-                <Grid container justify="space-evenly" direction="row" alignItems="center">
-                    <Grid item xs={6} style={styles.box}>
-                        <Paper style={styles.paper}>
-                            <Doughnut data={this.state.chartData} options={{ maintainAspectRatio: true }} />
-                        </Paper>
-                    </Grid>
-
-                    <Grid item xs={6} style={styles.box}>
-                        <Paper style={styles.paper}>
-                            <Bar data={this.state.chartData} options={{ maintainAspectRatio: true }} />
+                            <Bar data={this.state.barData} options={this.state.optionsBar} onElementsClick={ele => {
+                                window.localStorage.setItem('CourseName', this.state.barData.labels[ele[0]._index]);
+                                window.location.href = "/collegelist"
+                            }} />
                         </Paper>
                     </Grid>
                 </Grid>
