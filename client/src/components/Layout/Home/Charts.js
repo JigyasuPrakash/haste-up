@@ -98,7 +98,7 @@ class Charts extends Component {
         return (
             <div style={styles.root}>
                 <Grid container justify="space-evenly" direction="row" alignItems="center">
-                    <Grid item xs={6} style={styles.box}>
+                    <Grid item xs={8} style={styles.box}>
                         <Paper style={styles.paper}>
                             <Doughnut data={this.state.pieChartData} options={this.state.optionsPie} onElementsClick={ele => {
                                 if (ele[0] !== undefined) {
@@ -110,7 +110,7 @@ class Charts extends Component {
                         </Paper>
                     </Grid>
 
-                    <Grid item xs={6} style={styles.box}>
+                    <Grid item xs={8} style={styles.box}>
                         <Paper style={styles.paper}>
                             <Bar data={this.state.barData} options={this.state.optionsBar} onElementsClick={ele => {
                                 if (ele[0] !== undefined) {

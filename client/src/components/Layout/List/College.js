@@ -102,15 +102,15 @@ class CollegeList extends Component {
             },
             {
                 id: 'state',
-                label: 'state',
-                minWidth: 80,
+                label: 'State',
+                minWidth: 60,
                 align: 'right',
                 format: (value) => value.toLocaleString(),
             },
             {
                 id: 'no_of_students',
-                label: 'No of Student',
-                minWidth: 100,
+                label: 'No. of Student',
+                minWidth: 120,
                 align: 'right',
                 format: (value) => value.toLocaleString(),
             }
@@ -155,12 +155,12 @@ class CollegeList extends Component {
                         <Grid item xs={4} style={styles.box}>
                             <Card>
                                 <CardContent>
-                                    <Typography color="textSecondary" gutterBottom>No of Students</Typography>
+                                    <Typography color="textSecondary" gutterBottom>No. of Students</Typography>
                                     <Typography variant="h5" component="h2">
                                         {this.state.collegeDetail.no_of_students}
                                     </Typography>
                                     <Typography variant="body2" component="p">
-                                        and counting..
+                                        &nbsp;
                                     </Typography>
                                 </CardContent>
                             </Card>

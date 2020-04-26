@@ -9,6 +9,30 @@
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="icon" href="%PUBLIC_URL%/img/favicon.png" />
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCu25auGGGVV8diQapExdlaqIduTfk_L40",
+      authDomain: "haste-up.firebaseapp.com",
+      databaseURL: "https://haste-up.firebaseio.com",
+      projectId: "haste-up",
+      storageBucket: "haste-up.appspot.com",
+      messagingSenderId: "222528936007",
+      appId: "1:222528936007:web:c0f0ee6a3b92c869f63962",
+      measurementId: "G-H3BN0W7S0N"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   <title>Haste Up</title>
 </head>
 

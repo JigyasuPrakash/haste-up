@@ -48,16 +48,16 @@ class CollegeList extends Component {
                 minWidth: 100,
                 format: (value) => (<Button onClick={() => clickHandler(value)}>{value}</Button>)
             },
-            { id: 'year', label: 'year', minWidth: 50 },
+            { id: 'year', label: 'Year', minWidth: 50 },
             {
                 id: 'state',
-                label: 'state',
+                label: 'State',
                 minWidth: 100,
                 align: 'right',
             },
             {
                 id: 'no_of_students',
-                label: 'No of Student',
+                label: 'No. of Student',
                 minWidth: 50,
                 align: 'right',
             },
