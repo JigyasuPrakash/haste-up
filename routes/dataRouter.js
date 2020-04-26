@@ -117,16 +117,34 @@ router.get('/getchartdata', (req, res) => {
     })
 })
 
+// Get students by college name
+router.post('/getstudents', (req, res) => {
+    let result = [];
+    let collegeID = req.body.collegeID;
+    console.log(collegeID)
+    let option = {
+        college_id: collegeID
+    }
+
+    let collection = database.collection('student_data');
+    collection.find(option).forEach((student) => {
+        result.push(student);
+    }).then(() => {
+        res.json(result);
+    })
+})
+
 // Get Colleges List from Course/State name
 router.post('/getcollegesfromchart', (req, res) => {
     let result = [];
+
     let state = req.body.state;
     let course = req.body.course;
     var options = {};
 
     if (state != null && course == null) {
         options = {
-            state: StaticRange
+            state: state
         }
     } else if (course != null && state == null) {
         options = {

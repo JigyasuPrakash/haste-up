@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
 class CollegeList extends Component {
@@ -19,7 +20,7 @@ class CollegeList extends Component {
     }
 
     componentDidMount() {
-        axios.post('http://localhost:8080/getcollegesfromchart', {
+        axios.post('https://haste-up.herokuapp.com/getcollegesfromchart', {
             state: window.localStorage.getItem('StateName'),
             course: window.localStorage.getItem('BranchName')
         })
@@ -33,11 +34,20 @@ class CollegeList extends Component {
             })
     }
 
-
     render() {
+        
+        const clickHandler = (value) => {
+            window.localStorage.setItem('collegeName', value);
+            window.location.href = '/college';
+        }
 
         const columns = [
-            { id: 'name', label: 'Name', minWidth: 100 },
+            {
+                id: 'name',
+                label: 'Name',
+                minWidth: 100,
+                format: (value) => (<Button onClick={() => clickHandler(value)}>{value}</Button>)
+            },
             { id: 'year', label: 'year', minWidth: 50 },
             {
                 id: 'state',
@@ -75,14 +85,12 @@ class CollegeList extends Component {
                         <TableBody>
                             {this.state.rows.map((row) => {
                                 return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code} onClick={ele => {
-                                        console.log(ele)
-                                    }}>
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code} >
                                         {columns.map((column) => {
                                             const value = row[column.id];
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                    {column.format && column.id === 'name' ? column.format(value) : value}
                                                 </TableCell>
                                             );
                                         })}

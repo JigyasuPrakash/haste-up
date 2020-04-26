@@ -34,7 +34,7 @@ class Charts extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8080/getchartdata')
+        axios.get('https://haste-up.herokuapp.com/getchartdata')
             .then((response) => {
                 this.setState({
                     pieChartData: {
@@ -101,8 +101,11 @@ class Charts extends Component {
                     <Grid item xs={6} style={styles.box}>
                         <Paper style={styles.paper}>
                             <Doughnut data={this.state.pieChartData} options={this.state.optionsPie} onElementsClick={ele => {
-                                window.localStorage.setItem('StateName', this.state.barData.labels[ele[0]._index]);
-                                window.location.href = "/collegelist"
+                                if (ele[0] !== undefined) {
+                                    window.localStorage.setItem('StateName', this.state.pieChartData.labels[ele[0]._index]);
+                                    window.localStorage.removeItem('CourseName');
+                                    window.location.href = "/collegelist"
+                                }
                             }} />
                         </Paper>
                     </Grid>
@@ -110,8 +113,11 @@ class Charts extends Component {
                     <Grid item xs={6} style={styles.box}>
                         <Paper style={styles.paper}>
                             <Bar data={this.state.barData} options={this.state.optionsBar} onElementsClick={ele => {
-                                window.localStorage.setItem('CourseName', this.state.barData.labels[ele[0]._index]);
-                                window.location.href = "/collegelist"
+                                if (ele[0] !== undefined) {
+                                    window.localStorage.setItem('CourseName', this.state.barData.labels[ele[0]._index]);
+                                    window.localStorage.removeItem('StateName');
+                                    window.location.href = "/collegelist"
+                                }
                             }} />
                         </Paper>
                     </Grid>
