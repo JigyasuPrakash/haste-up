@@ -55,7 +55,7 @@ class CollegeList extends Component {
                         console.error("Somthing went wrong", err);
                     })
 
-                axios.post('http://localhost:8080/getstudents', {
+                axios.post('https://haste-up.herokuapp.com/getstudents', {
                     collegeID: window.localStorage.getItem('collegeID')
                 })
                     .then((result) => {
