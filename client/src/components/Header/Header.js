@@ -99,7 +99,6 @@ function Header(props) {
                                     Haste Up
                                 </NavLink>
                             </Typography>
-
                             <div className={classes.search}>
                                 <div className={classes.searchIcon}>
                                     <SearchIcon />
